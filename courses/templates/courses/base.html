@@ -3,48 +3,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Python Learning App{% endblock %}</title>
-    
-    <!-- Linking to Materialize CSS -->
-    <link href="{% static 'courses/css/materialize.min.css' %}" rel="stylesheet">
-    <link href="{% static 'courses/css/materialize.css' %}" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{% block title %}Python Learning App{% endblock %}</title>
+
+  <!-- Materialize CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <link href="{% static 'courses/css/materialize.min.css' %}" rel="stylesheet">
+  <link href="{% static 'courses/css/materialize.css' %}" rel="stylesheet">
+  <link href="{% static 'courses/css/global.css' %}" rel="stylesheet"> <!-- Your custom styles -->
 
 </head>
 <body>
 
-    <!-- Navigation Bar -->
-    <nav>
-        <div class="nav-wrapper">
-            <a href="/" class="brand-logo padding:left:40px">
-                {% comment %} <img src="{% static 'courses/images/logo.png' %}" alt="Logo" class="logo" style="height: 50px;"> {% endcomment %}
-                <h5 class="nav-head">Python Learning App</h5>
-            </a>
-            {% comment %} <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="/">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul> {% endcomment %}
-        </div>
-    </nav>
+  <!-- Navigation Bar -->
+  <nav>
+    <div class="nav-wrapper">
+      <a href="/" class="brand-logo">
+        <h5 class="nav-head">Python Learning App</h5>
+      </a>
 
-    <!-- Main Content -->
-    <div class="container padding-left:0">
-        {% block content %}
-        <!-- Page-specific content goes here -->
-        {% endblock %}
+      <!-- Hamburger Icon (top-right) -->
+      <div class="hamburger" onclick="toggleMobileMenu()">
+        <i class="fas fa-bars"></i>
+      </div>
+
+      <!-- Desktop Menu -->
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="/">Home</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
     </div>
+  </nav>
 
-    
+  <!-- Small Dropdown Menu (top-right) -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="/">Home</a>
+    <a href="#">Contact</a>
+  </div>
+
+  <!-- Page Content -->
+  <div class="custom-container">
+    {% block content %}
+    {% endblock %}
+  </div>
+
+  <!-- Scripts -->
+  <script src="{% static 'courses/js/materialize.min.js' %}"></script>
+  <script>
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    }
+
+    document.addEventListener('click', function(event) {
+      const menu = document.getElementById('mobileMenu');
+      const hamburger = document.querySelector('.hamburger');
+      if (!menu.contains(event.target) && !hamburger.contains(event.target)) {
+        menu.style.display = 'none';
+      }
+    });
+  </script>
 
 </body>
-<!-- Linking to the Materialize JS -->
-<script src="{% static 'courses/js/materialize.min.js' %}"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        M.AutoInit();
-    });
-</script>
 </html>

@@ -3,10 +3,11 @@
 {% block title %}Home - Python Learning App{% endblock %}
 
 {% block content %}
-<div class="row" style="display: flex;">
+<div class="row" style="display: flex; flex-wrap: wrap;">
 
     <!-- Left Column: Lessons and Quiz (25% width) -->
-    <div class="col s12 m3" style="flex: 0 0 25%; padding-right: 10px;">
+    <div class="col s12 m3" style="flex: 1 1 25%; padding-right: 10px; background-color: #f4f4f4; overflow-y: auto; padding: 20px; box-sizing: border-box;">
+        <!-- Sidebar Content -->
         <h5>Python Lessons</h5>
         <ul id="lesson-list" class="collection">
             {% for lesson in lessons %}
@@ -29,7 +30,7 @@
     </div>
 
     <!-- Right Column: Lesson Detail (75% width) -->
-    <div class="col s12 m9" id="lesson-detail" style="flex: 0 0 75%; padding-left: 40px;">
+    <div class="col s12 m9" id="lesson-detail" style="flex: 1 1 75%; padding-left: 40px; padding-top: 20px; box-sizing: border-box;">
         <h5>What is Python?</h5>
         <p>
             Python is a popular programming language. It was created by Guido van Rossum, and released in 1991.</br></br>
@@ -51,50 +52,38 @@
 </div>
 
 <script>
-    // Handle clicking on lesson titles to display topics
     document.querySelectorAll('a[data-id]').forEach(link => {
-        link.addEventListener('click', function(event) {
+        link.addEventListener('click', function (event) {
             event.preventDefault();
             const lessonId = this.dataset.id;
             const topicList = document.getElementById(`topics-${lessonId}`);
 
-            // Toggle visibility of the topics list
-            if (topicList.style.display === "block") {
-                topicList.style.display = "none";
-            } else {
-                // Collapse other topic lists
-                document.querySelectorAll('.topics').forEach(el => {
-                    el.style.display = "none";
-                });
-                topicList.style.display = "block";
-            }
+            document.querySelectorAll('.topics').forEach(el => {
+                el.style.display = "none";
+            });
+
+            topicList.style.display = (topicList.style.display === "block") ? "none" : "block";
         });
     });
 
-    // Handle clicking on topic titles to fetch and display topic details
-    document.getElementById("lesson-list").addEventListener("click", function(event) {
+    document.getElementById("lesson-list").addEventListener("click", function (event) {
         if (event.target.tagName.toLowerCase() === 'a' && event.target.hasAttribute('data-topic-id')) {
             const topicId = event.target.getAttribute("data-topic-id");
 
-            fetch(`/topic/${topicId}/details/`)  // URL to your Django view for topic details
+            fetch(`/topic/${topicId}/details/`)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error("Network response was not ok");
                     }
-                    return response.json();  // Make sure your view returns JSON
+                    return response.text(); // Get full HTML
                 })
-                .then(data => {
+                .then(html => {
                     const lessonDetail = document.getElementById("lesson-detail");
-                    lessonDetail.innerHTML = `
-                        <h5>${data.title}</h5>
-                        <p>${data.content}</p>
-                        <h6>Code Snippet</h6>
-                        <pre style="background-color:#f4f4f4; padding: 1rem; border-left: 4px solid #2196f3; border-radius: 5px;">
-                            <code>${data.code_snippet}</code>
-                        </pre>
-                    `;
+                    lessonDetail.innerHTML = html; // Replace right panel with topic detail HTML
                 })
-                .catch(error => console.error('Error fetching topic details:', error));
+                .catch(error => {
+                    console.error('Error fetching topic details:', error);
+                });
         }
     });
 </script>

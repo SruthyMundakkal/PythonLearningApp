@@ -1,9 +1,7 @@
-<h5>{{ lesson.title }}</h5>
-<p>{{ lesson.description }}</p>
+<h5>{{ topic.title }}</h5>
+<p>{{ topic.content }}</p>
 
-<h5>Topics</h5>
-<ul>
-    {% for topic in lesson.topics.all %}
-        <li>{{ topic.title }} </li>
-    {% endfor %}
-</ul>
+<h6>Code Snippet</h6>
+<pre style="background-color:#f4f4f4; padding: 1rem; border-left: 4px solid #2196f3; border-radius: 5px;">
+    <code>{{ topic.code_snippet }}</code>
+</pre>
