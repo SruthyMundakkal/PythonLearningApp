@@ -12,32 +12,35 @@
 
           <!-- Option 1 -->
           <p>
-            <input type="radio" id="option_1_{{ quiz.id }}" name="question_{{ quiz.id }}" value="{{ quiz.option_1 }}" class="with-gap" 
-            style="appearance: none; -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; border: 2px solid #4CAF50; background-color: #4CAF50; outline: none; margin-right: 10px;">
-            <label for="option_1_{{ quiz.id }}" style="color: #4CAF50;">{{ quiz.option_1 }}</label>
+            <label>
+              <input type="radio" id="option_1_{{ quiz.id }}" name="question_{{ quiz.id }}" value="{{ quiz.option_1 }}" class="with-gap" />
+              <span style="color: #4CAF50;">{{ quiz.option_1 }}</span>
+            </label>
           </p>
 
           <!-- Option 2 -->
           <p>
-            <input type="radio" id="option_2_{{ quiz.id }}" name="question_{{ quiz.id }}" value="{{ quiz.option_2 }}" class="with-gap" 
-            style="appearance: none; -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; border: 2px solid #2196F3; background-color: #2196F3; outline: none; margin-right: 10px;">
-            <label for="option_2_{{ quiz.id }}" style="color: #2196F3;">{{ quiz.option_2 }}</label>
+            <label>
+              <input type="radio" id="option_2_{{ quiz.id }}" name="question_{{ quiz.id }}" value="{{ quiz.option_2 }}" class="with-gap" />
+              <span style="color: #2196F3;">{{ quiz.option_2 }}</span>
+            </label>
           </p>
 
           <!-- Option 3 -->
           <p>
-            <input type="radio" id="option_3_{{ quiz.id }}" name="question_{{ quiz.id }}" value="{{ quiz.option_3 }}" class="with-gap" 
-            style="appearance: none; -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; border: 2px solid #FF9800; background-color: #FF9800; outline: none; margin-right: 10px;">
-            <label for="option_3_{{ quiz.id }}" style="color: #FF9800;">{{ quiz.option_3 }}</label>
+            <label>
+              <input type="radio" id="option_3_{{ quiz.id }}" name="question_{{ quiz.id }}" value="{{ quiz.option_3 }}" class="with-gap" />
+              <span style="color: #FF9800;">{{ quiz.option_3 }}</span>
+            </label>
           </p>
 
           <!-- Option 4 -->
           <p>
-            <input type="radio" id="option_4_{{ quiz.id }}" name="question_{{ quiz.id }}" value="{{ quiz.option_4 }}" class="with-gap" 
-            style="appearance: none; -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; border: 2px solid #E91E63; background-color: #E91E63; outline: none; margin-right: 10px;">
-            <label for="option_4_{{ quiz.id }}" style="color: #E91E63;">{{ quiz.option_4 }}</label>
+            <label>
+              <input type="radio" id="option_4_{{ quiz.id }}" name="question_{{ quiz.id }}" value="{{ quiz.option_4 }}" class="with-gap" />
+              <span style="color: #E91E63;">{{ quiz.option_4 }}</span>
+            </label>
           </p>
-
 
         </li>
       {% empty %}
