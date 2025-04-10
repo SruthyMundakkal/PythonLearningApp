@@ -7,10 +7,11 @@
     <!-- Left Column: Lessons and Quiz -->
     <div class="col s12 m6">
         <h5>Python Lessons</h5>
-        <ul>
+        <ul id="lesson-list">
             {% for lesson in lessons %}
                 <li>
                     <a href="#" data-id="{{ lesson.id }}">{{ lesson.title }}</a>
+                    <ul class="topics" id="topics-{{ lesson.id }}" style="display: none; margin-left: 20px;"></ul>
                 </li>
             {% endfor %}
         </ul>
@@ -37,30 +38,53 @@
             </ol>
         </p>
 
-        
+        <h6>Example</h6>
+        <pre style="background-color:#f4f4f4; padding: 1rem; border-left: 4px solid #2196f3; border-radius: 5px;">
+            <code>print("Hello, World!")</code>
+        </pre>
 
     </div>
 </div>
 
 <script>
-    // This script updates the right column with lesson details when a lesson is clicked
     document.querySelectorAll('a[data-id]').forEach(link => {
         link.addEventListener('click', function(event) {
             event.preventDefault();
             const lessonId = this.dataset.id;
+            const topicList = document.getElementById(`topics-${lessonId}`);
 
-            fetch(`/lesson/${lessonId}/`)
+            // Toggle visibility
+            if (topicList.style.display === "block") {
+                topicList.style.display = "none";
+                topicList.innerHTML = "";
+                return;
+            }
+
+            // Collapse all other topic lists
+            document.querySelectorAll('.topics').forEach(el => {
+                el.style.display = "none";
+                el.innerHTML = "";
+            });
+
+            fetch(`/lesson/${lessonId}/topics/`)  // Adjust this URL to your Django view
                 .then(response => {
                     if (!response.ok) {
                         throw new Error("Network response was not ok");
                     }
-                    return response.text();
+                    return response.json(); // Make sure your view returns JSON
                 })
-                .then(html => {
-                    document.getElementById('lesson-detail').innerHTML = html;
+                .then(data => {
+                    topicList.innerHTML = "";
+                    data.forEach(topic => {
+                        const li = document.createElement('li');
+                        li.textContent = topic.title;
+                        topicList.appendChild(li);
+                    });
+                    topicList.style.display = "block";
                 })
-                .catch(error => console.error('Error fetching lesson details:', error));
+                .catch(error => console.error('Error fetching topics:', error));
         });
     });
 </script>
+
 {% endblock %}
