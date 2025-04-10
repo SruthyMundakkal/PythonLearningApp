@@ -12,6 +12,10 @@ def lesson_detail(request, id):
     lesson = get_object_or_404(Lesson, id=id)
     return render(request, 'courses/lesson_detail.html', {'lesson': lesson})
 
+def topic_detail_partial(request, topic_id):
+    topic = get_object_or_404(Topic, id=topic_id)
+    return render(request, 'courses/lesson_detail.html', {'topic': topic})
+
 
 def lesson_topics(request, lesson_id):
     topics = Topic.objects.filter(lesson_id=lesson_id).values('title')

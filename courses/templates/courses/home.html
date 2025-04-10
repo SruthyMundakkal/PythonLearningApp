@@ -51,50 +51,38 @@
 </div>
 
 <script>
-    // Handle clicking on lesson titles to display topics
     document.querySelectorAll('a[data-id]').forEach(link => {
-        link.addEventListener('click', function(event) {
+        link.addEventListener('click', function (event) {
             event.preventDefault();
             const lessonId = this.dataset.id;
             const topicList = document.getElementById(`topics-${lessonId}`);
 
-            // Toggle visibility of the topics list
-            if (topicList.style.display === "block") {
-                topicList.style.display = "none";
-            } else {
-                // Collapse other topic lists
-                document.querySelectorAll('.topics').forEach(el => {
-                    el.style.display = "none";
-                });
-                topicList.style.display = "block";
-            }
+            document.querySelectorAll('.topics').forEach(el => {
+                el.style.display = "none";
+            });
+
+            topicList.style.display = (topicList.style.display === "block") ? "none" : "block";
         });
     });
 
-    // Handle clicking on topic titles to fetch and display topic details
-    document.getElementById("lesson-list").addEventListener("click", function(event) {
+    document.getElementById("lesson-list").addEventListener("click", function (event) {
         if (event.target.tagName.toLowerCase() === 'a' && event.target.hasAttribute('data-topic-id')) {
             const topicId = event.target.getAttribute("data-topic-id");
 
-            fetch(`/topic/${topicId}/details/`)  // URL to your Django view for topic details
+            fetch(`/topic/${topicId}/details/`)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error("Network response was not ok");
                     }
-                    return response.json();  // Make sure your view returns JSON
+                    return response.text(); // Get full HTML
                 })
-                .then(data => {
+                .then(html => {
                     const lessonDetail = document.getElementById("lesson-detail");
-                    lessonDetail.innerHTML = `
-                        <h5>${data.title}</h5>
-                        <p>${data.content}</p>
-                        <h6>Code Snippet</h6>
-                        <pre style="background-color:#f4f4f4; padding: 1rem; border-left: 4px solid #2196f3; border-radius: 5px;">
-                            <code>${data.code_snippet}</code>
-                        </pre>
-                    `;
+                    lessonDetail.innerHTML = html; // Replace right panel with topic detail HTML
                 })
-                .catch(error => console.error('Error fetching topic details:', error));
+                .catch(error => {
+                    console.error('Error fetching topic details:', error);
+                });
         }
     });
 </script>
