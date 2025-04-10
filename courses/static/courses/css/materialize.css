@@ -3,6 +3,58 @@
  * Copyright 2014-2017 Materialize
  * MIT License (https://raw.githubusercontent.com/Dogfalo/materialize/master/LICENSE)
  */
+
+/* Style for lesson list */
+#lesson-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+#lesson-list li {
+  margin-bottom: 10px;
+}
+
+/* Styling for each topic list */
+.topics {
+  background-color: #918383;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for individual topic items */
+.topics li {
+  margin: 5px 0;
+}
+
+#lesson-detail {
+  background-color: #d2c4c4;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Code snippet styling */
+.code-snippet {
+  padding: 10px;
+  background-color: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  overflow-x: auto;
+}
+
+/* Ensure the links within topics are styled appropriately */
+.topic-title {
+  text-decoration: none;
+  color: #00796b;
+}
+
+.topic-title:hover {
+  color: #004d40;
+}
+
 .materialize-red {
   background-color: #e51c23 !important;
 }
@@ -2175,6 +2227,7 @@ header,
 nav,
 section {
   display: block;
+  padding-left: 0%;
 }
 
 /**
@@ -3429,9 +3482,10 @@ table span.badge {
 }
 
 .container {
-  margin: 0 auto;
+  padding-left: 0%;
+  margin: 0;
   max-width: 1280px;
-  width: 90%;
+  width: 100%;
 }
 
 @media only screen and (min-width: 601px) {
@@ -4372,6 +4426,10 @@ nav .brand-logo [class^="mdi-"], nav .brand-logo [class*="mdi-"],
 nav .brand-logo i.material-icons {
   float: left;
   margin-right: 15px;
+}
+
+nav .nav-head {
+  padding-left: 28px 0;
 }
 
 nav .nav-title {
@@ -8486,10 +8544,19 @@ input[type=range]::-ms-thumb {
   visibility: visible;
   -webkit-animation: pulse-animation 1s cubic-bezier(0.24, 0, 0.38, 1) infinite;
           animation: pulse-animation 1s cubic-bezier(0.24, 0, 0.38, 1) infinite;
-  -webkit-transition: opacity .3s, visibility 0s 1s, -webkit-transform .3s;
-  transition: opacity .3s, visibility 0s 1s, -webkit-transform .3s;
-  transition: opacity .3s, transform .3s, visibility 0s 1s;
-  transition: opacity .3s, transform .3s, visibility 0s 1s, -webkit-transform .3s;
+  -webkit-transition: opacity .3s,
+ visibility 0s 1s,
+ -webkit-transform .3s;
+  transition: opacity .3s,
+ visibility 0s 1s,
+ -webkit-transform .3s;
+  transition: opacity .3s,
+ transform .3s,
+ visibility 0s 1s;
+  transition: opacity .3s,
+ transform .3s,
+ visibility 0s 1s,
+ -webkit-transform .3s;
 }
 
 .tap-target {
@@ -8542,10 +8609,19 @@ input[type=range]::-ms-thumb {
 
 .tap-target-wave::after {
   visibility: hidden;
-  -webkit-transition: opacity .3s, visibility 0s, -webkit-transform .3s;
-  transition: opacity .3s, visibility 0s, -webkit-transform .3s;
-  transition: opacity .3s, transform .3s, visibility 0s;
-  transition: opacity .3s, transform .3s, visibility 0s, -webkit-transform .3s;
+  -webkit-transition: opacity .3s,
+ visibility 0s,
+ -webkit-transform .3s;
+  transition: opacity .3s,
+ visibility 0s,
+ -webkit-transform .3s;
+  transition: opacity .3s,
+ transform .3s,
+ visibility 0s;
+  transition: opacity .3s,
+ transform .3s,
+ visibility 0s,
+ -webkit-transform .3s;
   z-index: -1;
 }
 
