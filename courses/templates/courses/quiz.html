@@ -2,15 +2,51 @@
 
 {% block content %}
   <h2>All Quiz Questions</h2>
-  <ul>
-    {% for quiz in quizzes %}
-      <li>
-        <strong>Topic:</strong> {{ quiz.topic.title }}<br>
-        <strong>Q:</strong> {{ quiz.question }}<br>
-        <strong>A:</strong> {{ quiz.answer }}
-      </li>
-    {% empty %}
-      <li>No quizzes available.</li>
-    {% endfor %}
-  </ul>
+  <form method="POST">
+    {% csrf_token %}
+    <ul>
+      {% for quiz in quizzes %}
+        <li>
+          <strong>Topic:</strong> {{ quiz.topic.title }}<br>
+          <strong>Q:</strong> {{ quiz.question }}<br>
+
+          <!-- Option 1 -->
+          <p>
+            <label>
+              <input type="radio" id="option_1_{{ quiz.id }}" name="question_{{ quiz.id }}" value="{{ quiz.option_1 }}" class="with-gap" />
+              <span style="color: #4CAF50;">{{ quiz.option_1 }}</span>
+            </label>
+          </p>
+
+          <!-- Option 2 -->
+          <p>
+            <label>
+              <input type="radio" id="option_2_{{ quiz.id }}" name="question_{{ quiz.id }}" value="{{ quiz.option_2 }}" class="with-gap" />
+              <span style="color: #2196F3;">{{ quiz.option_2 }}</span>
+            </label>
+          </p>
+
+          <!-- Option 3 -->
+          <p>
+            <label>
+              <input type="radio" id="option_3_{{ quiz.id }}" name="question_{{ quiz.id }}" value="{{ quiz.option_3 }}" class="with-gap" />
+              <span style="color: #FF9800;">{{ quiz.option_3 }}</span>
+            </label>
+          </p>
+
+          <!-- Option 4 -->
+          <p>
+            <label>
+              <input type="radio" id="option_4_{{ quiz.id }}" name="question_{{ quiz.id }}" value="{{ quiz.option_4 }}" class="with-gap" />
+              <span style="color: #E91E63;">{{ quiz.option_4 }}</span>
+            </label>
+          </p>
+
+        </li>
+      {% empty %}
+        <li>No quizzes available.</li>
+      {% endfor %}
+    </ul>
+    <button type="submit" class="btn waves-effect waves-light">Submit Quiz</button>
+  </form>
 {% endblock %}
