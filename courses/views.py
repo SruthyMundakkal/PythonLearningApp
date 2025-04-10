@@ -22,3 +22,16 @@ def quiz(request):
     return render(request, 'courses/quiz.html', {
         'quizzes': quizzes
     })
+    
+def topic_detail(request, topic_id):
+    try:
+        topic = Topic.objects.get(id=topic_id)
+        lesson = topic.lesson
+        # Return the details of the topic as a JSON response
+        return JsonResponse({
+            'title': topic.title,
+            'content': topic.content,  # Add any other relevant fields
+            'code_snippet': topic.code_snippet  # Add code snippet if necessary
+        })
+    except Topic.DoesNotExist:
+        return JsonResponse({'error': 'Topic not found'}, status=404)
