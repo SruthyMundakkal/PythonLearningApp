@@ -3,10 +3,11 @@
 {% block title %}Home - Python Learning App{% endblock %}
 
 {% block content %}
-<div class="row" style="display: flex;">
+<div class="row" style="display: flex; flex-wrap: wrap;">
 
     <!-- Left Column: Lessons and Quiz (25% width) -->
-    <div class="col s12 m3" style="flex: 0 0 25%; padding-right: 10px;">
+    <div class="col s12 m3" style="flex: 1 1 25%; padding-right: 10px; background-color: #f4f4f4; overflow-y: auto; padding: 20px; box-sizing: border-box;">
+        <!-- Sidebar Content -->
         <h5>Python Lessons</h5>
         <ul id="lesson-list" class="collection">
             {% for lesson in lessons %}
@@ -29,7 +30,7 @@
     </div>
 
     <!-- Right Column: Lesson Detail (75% width) -->
-    <div class="col s12 m9" id="lesson-detail" style="flex: 0 0 75%; padding-left: 40px;">
+    <div class="col s12 m9" id="lesson-detail" style="flex: 1 1 75%; padding-left: 40px; padding-top: 20px; box-sizing: border-box;">
         <h5>What is Python?</h5>
         <p>
             Python is a popular programming language. It was created by Guido van Rossum, and released in 1991.</br></br>

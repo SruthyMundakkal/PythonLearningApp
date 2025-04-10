@@ -6,6 +6,15 @@ nav .nav-head {
     padding-left: 0;
     padding-bottom: 30px;
   }
+
+  .custom-container {
+    padding-left: 0;
+    padding-right: 10;
+    margin: 0;
+    max-width: 1280px;
+    width: 100%;
+  }
+  
   
   .hamburger {
     display: none;
