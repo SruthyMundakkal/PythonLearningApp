@@ -19,9 +19,14 @@ def lesson_topics(request, lesson_id):
 
 def quiz(request):
     quizzes = Quiz.objects.select_related('topic').all()
-    return render(request, 'courses/quiz.html', {
-        'quizzes': quizzes
-    })
+    if request.method == 'POST':
+        score = 0
+        for quiz in quizzes:
+            answer = request.POST.get(f'question_{quiz.id}')
+            if answer == quiz.answer:
+                score += 1
+        return render(request, 'courses/quiz_result.html', {'score': score, 'total': len(quizzes)})
+    return render(request, 'courses/quiz.html', {'quizzes': quizzes})
     
 def topic_detail(request, topic_id):
     try:
