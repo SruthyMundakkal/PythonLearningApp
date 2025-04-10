@@ -17,17 +17,7 @@ def lesson_topics(request, lesson_id):
     topics = Topic.objects.filter(lesson_id=lesson_id).values('title')
     return JsonResponse(list(topics), safe=False)
 
-def quiz(request):
-    quizzes = Quiz.objects.select_related('topic').all()
-    if request.method == 'POST':
-        score = 0
-        for quiz in quizzes:
-            answer = request.POST.get(f'question_{quiz.id}')
-            if answer == quiz.answer:
-                score += 1
-        return render(request, 'courses/quiz_result.html', {'score': score, 'total': len(quizzes)})
-    return render(request, 'courses/quiz.html', {'quizzes': quizzes})
-    
+
 def topic_detail(request, topic_id):
     try:
         topic = Topic.objects.get(id=topic_id)
@@ -40,3 +30,29 @@ def topic_detail(request, topic_id):
         })
     except Topic.DoesNotExist:
         return JsonResponse({'error': 'Topic not found'}, status=404)
+    
+    
+def quiz(request):
+    quizzes = Quiz.objects.select_related('topic').all()
+    if request.method == 'POST':
+        score = 0
+        quiz_results = []
+        for quiz in quizzes:
+            answer = request.POST.get(f'question_{quiz.id}')
+            is_correct = answer == quiz.correct_answer  # Check if answer is correct
+            if is_correct:
+                score += 1
+            # Store the quiz, the selected answer, and the correct answer
+            quiz_results.append({
+                'question': quiz.question,
+                'selected_answer': answer,
+                'correct_answer': quiz.correct_answer,
+                'is_correct': is_correct
+            })
+        
+        return render(request, 'courses/quiz_result.html', {
+            'score': score,
+            'total': len(quizzes),
+            'quiz_results': quiz_results  # Pass quiz results to the template
+        })
+    return render(request, 'courses/quiz.html', {'quizzes': quizzes})

@@ -1,7 +1,22 @@
-<!-- quiz_result.html -->
 {% extends 'courses/base.html' %}
 
 {% block content %}
 <h2>Your Quiz Result</h2>
 <p>You scored {{ score }} out of {{ total }}!</p>
+
+<h3>Quiz Questions and Answers:</h3>
+<ul>
+  {% for result in quiz_results %}
+    <li>
+      <strong>Question:</strong> {{ result.question }}<br>
+      <strong>Your Answer:</strong> {{ result.selected_answer }}<br>
+      <strong>Correct Answer:</strong> {{ result.correct_answer }}<br>
+      {% if result.is_correct %}
+        <span style="color: green;">Correct</span>
+      {% else %}
+        <span style="color: red;">Incorrect</span>
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>
 {% endblock %}
