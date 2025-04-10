@@ -1,0 +1,66 @@
+{% extends 'courses/base.html' %}
+
+{% block title %}Home - Python Learning App{% endblock %}
+
+{% block content %}
+<div class="row">
+    <!-- Left Column: Lessons and Quiz -->
+    <div class="col s12 m6">
+        <h5>Python Lessons</h5>
+        <ul>
+            {% for lesson in lessons %}
+                <li>
+                    <a href="#" data-id="{{ lesson.id }}">{{ lesson.title }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <!-- Your template is mostly good — no changes needed except that now topics will load -->
+        <!-- Quiz Section -->
+        <h5>Take a Quiz</h5>
+        <a href="{% url 'quiz' %}" class="btn">Take All Quizzes</a>
+    </div>
+
+    <!-- Right Column: Lesson Detail -->
+    <div class="col s12 m6" id="lesson-detail">
+        <h5>What is Python?</h5>
+
+        <p>
+            Python is a popular programming language. It was created by Guido van Rossum, and released in 1991.</br></br>
+            It is used for:
+
+            <ol>
+                <li>web development (server-side),</li>
+                <li>software development,</li>
+                <li>mathematics,</li>
+                <li>system scripting.</li>
+            </ol>
+        </p>
+
+        
+
+    </div>
+</div>
+
+<script>
+    // This script updates the right column with lesson details when a lesson is clicked
+    document.querySelectorAll('a[data-id]').forEach(link => {
+        link.addEventListener('click', function(event) {
+            event.preventDefault();
+            const lessonId = this.dataset.id;
+
+            fetch(`/lesson/${lessonId}/`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok");
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    document.getElementById('lesson-detail').innerHTML = html;
+                })
+                .catch(error => console.error('Error fetching lesson details:', error));
+        });
+    });
+</script>
+{% endblock %}

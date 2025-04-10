@@ -1,0 +1,16 @@
+{% extends 'courses/base.html' %}
+
+{% block content %}
+  <h2>All Quiz Questions</h2>
+  <ul>
+    {% for quiz in quizzes %}
+      <li>
+        <strong>Topic:</strong> {{ quiz.topic.title }}<br>
+        <strong>Q:</strong> {{ quiz.question }}<br>
+        <strong>A:</strong> {{ quiz.answer }}
+      </li>
+    {% empty %}
+      <li>No quizzes available.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

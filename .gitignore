@@ -1,0 +1,42 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django stuff
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+db.sqlite3
+media/
+staticfiles/
+
+# Virtualenv
+venv/
+env/
+ENV/
+.venv/
+.idea/
+.vscode/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Secret settings
+*.env
+.env.*
+
+# Migrations (optional, if you want to reset them manually)
+*/migrations/__pycache__/
+*/migrations/*.pyc
+*/migrations/*.pyo
+*/migrations/*.pyd
+
+# VSCode and PyCharm configs (optional)
+.vscode/
+*.code-workspace
+*.sublime-project
+*.sublime-workspace

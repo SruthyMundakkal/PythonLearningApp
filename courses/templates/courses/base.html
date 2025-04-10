@@ -1,0 +1,47 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Python Learning App{% endblock %}</title>
+    
+    <!-- Linking to Materialize CSS -->
+    <link href="{% static 'courses/css/materialize.min.css' %}" rel="stylesheet">
+    <link href="{% static 'courses/css/materialize.css' %}" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="nav-wrapper">
+            <a href="/" class="brand-logo">
+                {% comment %} <img src="{% static 'courses/images/logo.png' %}" alt="Logo" class="logo" style="height: 50px;"> {% endcomment %}
+                <h5>Python Learning App</h5>
+            </a>
+            {% comment %} <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="/">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul> {% endcomment %}
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        {% block content %}
+        <!-- Page-specific content goes here -->
+        {% endblock %}
+    </div>
+
+    <!-- Linking to the Materialize JS -->
+    <script src="{% static 'courses/js/materialize.min.js' %}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            M.AutoInit();
+        });
+    </script>
+
+</body>
+</html>
