@@ -19,7 +19,12 @@ class Topic(models.Model):
 class Quiz(models.Model):
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE, related_name='quizzes')
     question = models.TextField()
-    answer = models.TextField()
+    correct_answer = models.TextField()
+    option_1 = models.TextField(default='Default Option 1')  # Add default value here
+    option_2 = models.TextField(default='Default Option 2')
+    option_3 = models.TextField(default='Default Option 3')
+    option_4 = models.TextField(default='Default Option 4')
 
     def __str__(self):
         return self.question
+
