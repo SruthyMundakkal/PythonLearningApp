@@ -10,7 +10,8 @@ class Lesson(models.Model):
 class Topic(models.Model):
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE, related_name='topics')
     title = models.CharField(max_length=255)
-    content = models.TextField()
+    content = models.TextField()  # TextField already allows large content, so no need to change this
+    code_snippet = models.TextField(blank=True, null=True)  # New field for optional code
 
     def __str__(self):
         return self.title

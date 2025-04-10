@@ -16,9 +16,9 @@
     <!-- Navigation Bar -->
     <nav>
         <div class="nav-wrapper">
-            <a href="/" class="brand-logo">
+            <a href="/" class="brand-logo padding:left:40px">
                 {% comment %} <img src="{% static 'courses/images/logo.png' %}" alt="Logo" class="logo" style="height: 50px;"> {% endcomment %}
-                <h5>Python Learning App</h5>
+                <h5 class="nav-head">Python Learning App</h5>
             </a>
             {% comment %} <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a href="/">Home</a></li>
@@ -29,7 +29,7 @@
     </nav>
 
     <!-- Main Content -->
-    <div class="container">
+    <div class="container padding-left:0">
         {% block content %}
         <!-- Page-specific content goes here -->
         {% endblock %}
