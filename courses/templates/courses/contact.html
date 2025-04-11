@@ -1,0 +1,40 @@
+{% extends 'courses/base.html' %}
+
+{% block content %}
+  <div class="contact-container" style="padding: 20px; max-width: 800px; margin: 0 auto;">
+    <h5 class="center-align" style="font-weight: bold; margin-bottom: 30px;">Contact Us</h5>
+    
+    <form method="POST" class="z-depth-1" style="padding: 20px; border-radius: 10px; background-color: #fafafa;">
+      {% csrf_token %}
+      
+      <!-- Name Input -->
+      <div class="input-field">
+        <input type="text" id="name" name="name" required class="validate" />
+        <label for="name">Your Name</label>
+      </div>
+
+      <!-- Email Input -->
+      <div class="input-field">
+        <input type="email" id="email" name="email" required class="validate" />
+        <label for="email">Your Email</label>
+      </div>
+
+      <!-- Subject Input -->
+      <div class="input-field">
+        <input type="text" id="subject" name="subject" required class="validate" />
+        <label for="subject">Subject</label>
+      </div>
+
+      <!-- Message Textarea -->
+      <div class="input-field">
+        <textarea id="message" name="message" class="materialize-textarea validate" required></textarea>
+        <label for="message">Your Message</label>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="btn waves-effect waves-light">
+        Send Message
+      </button>
+    </form>
+  </div>
+{% endblock %}

@@ -30,7 +30,7 @@
     </div>
 
     <!-- Right Column: Lesson Detail (75% width) -->
-    <div class="col s12 m9" id="lesson-detail" style="flex: 1 1 75%; padding-left: 40px; padding-top: 20px; box-sizing: border-box;">
+    <div class="col s12 m9" id="lesson-details" style="flex: 1 1 75%; padding-left: 40px; padding-top: 20px; box-sizing: border-box;">
         <h5>What is Python?</h5>
         <p>
             Python is a popular programming language. It was created by Guido van Rossum, and released in 1991.</br></br>
@@ -78,7 +78,7 @@
                     return response.text(); // Get full HTML
                 })
                 .then(html => {
-                    const lessonDetail = document.getElementById("lesson-detail");
+                    const lessonDetail = document.getElementById("lesson-details");
                     lessonDetail.innerHTML = html; // Replace right panel with topic detail HTML
                 })
                 .catch(error => {

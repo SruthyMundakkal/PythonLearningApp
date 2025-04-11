@@ -1,6 +1,15 @@
 from django.shortcuts import render, get_object_or_404
+
+from courses.forms import ContactForm
 from .models import Lesson, Topic, Quiz
-from django.http import JsonResponse  # Add this import
+from django.http import JsonResponse 
+from django.conf import settings
+from django.core.mail import send_mail
+from django.shortcuts import render
+from django.http import HttpResponse
+from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
+
 
 def home(request):
     lessons = Lesson.objects.all()
@@ -60,3 +69,29 @@ def quiz(request):
             'quiz_results': quiz_results  # Pass quiz results to the template
         })
     return render(request, 'courses/quiz.html', {'quizzes': quizzes})
+
+
+def contact(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            subject = form.cleaned_data['subject']
+            message = form.cleaned_data['message']
+
+            # Send email (make sure to configure your email settings in settings.py)
+            send_mail(
+                f"Message from {name}: {subject}",
+                message,
+                email,
+                [settings.CONTACT_EMAIL],  # Set this in your settings.py
+            )
+
+            # Redirect to a success page or display a success message
+            return render(request, 'courses/contact_success.html')
+
+    else:
+        form = ContactForm()
+
+    return render(request, 'courses/contact.html', {'form': form})
