@@ -1,5 +1,9 @@
 from django.contrib import admin
-from .models import Lesson, Topic, Quiz
+from .models import Lesson
+from .models import Topic
+from .models import Quiz
+
+
 
 class TopicInline(admin.TabularInline):
     model = Topic
