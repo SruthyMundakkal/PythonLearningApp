@@ -1,5 +1,8 @@
+{% load custom_filters %}
+
 <h5>{{ topic.title }}</h5>
-<p>{{ topic.content }}</p>
+{% comment %} <p>{{ topic.content }}</p> {% endcomment %}
+<p>{{ topic.content|sentence_break|safe }}</p>
 
 <h6>Code Snippet</h6>
 <pre style="background-color:#f4f4f4; padding: 1rem; border-left: 4px solid #2196f3; border-radius: 5px;">
