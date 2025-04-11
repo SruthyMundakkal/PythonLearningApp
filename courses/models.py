@@ -3,6 +3,7 @@ from django.db import models
 class Lesson(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
+    des = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.title
@@ -12,6 +13,7 @@ class Topic(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField()  # TextField already allows large content, so no need to change this
     code_snippet = models.TextField(blank=True, null=True)  # New field for optional code
+    description = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.title
