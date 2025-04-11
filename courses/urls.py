@@ -9,6 +9,6 @@ urlpatterns = [
     path('topic/<int:topic_id>/details/', views.topic_detail_partial, name='topic_detail_partial'),
     path('contact/', views.contact, name='contact'),
     path('lesson/<int:id>/', views.lesson_detail, name='lesson-detail'),
-    path('run_code/<int:topic_id>/', views.run_code, name='run_code'),
+    path('run_code/', views.run_code, name='run_code'),
     
 ]

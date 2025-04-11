@@ -102,7 +102,7 @@ def contact(request):
 
     return render(request, 'courses/contact.html', {'form': form})
 
-def run_code(request, topic_id):
+def run_code(request):
     if request.method == "POST":
         code_snippet = request.POST.get("code_snippet", "")
         print(f"Received code: {code_snippet}")  # For debugging
