@@ -7,6 +7,56 @@ nav .nav-head {
     padding-bottom: 30px;
   }
 
+  #lesson-list {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  #lesson-list li {
+    margin-bottom: 10px;
+  }
+  
+  /* Styling for each topic list */
+  .topics {
+    /* background-color: #918383; */
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Styling for individual topic items */
+  .topics li {
+    margin: 5px 0;
+  }
+  
+  #lesson-detail {
+    /* background-color: #d2c4c4; */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Code snippet styling */
+  .code-snippet {
+    padding: 10px;
+    background-color: #fafafa;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    overflow-x: auto;
+  }
+  
+  /* Ensure the links within topics are styled appropriately */
+  .topic-title {
+    text-decoration: none;
+    color: #00796b;
+  }
+  
+  .topic-title:hover {
+    color: #004d40;
+  }
+
   .custom-container {
     padding-left: 0;
     padding-right: 10;
@@ -37,6 +87,9 @@ nav .nav-head {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
     z-index: 1000;
     border-radius: 5px;
+  }
+  #code-editor {
+    height: 300px;
   }
   
   .mobile-menu a {

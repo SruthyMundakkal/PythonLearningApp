@@ -9,6 +9,10 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
+from django.shortcuts import render
+from django.http import JsonResponse
+import sys
+import io
 
 
 def home(request):
@@ -95,3 +99,26 @@ def contact(request):
         form = ContactForm()
 
     return render(request, 'courses/contact.html', {'form': form})
+
+def run_code(request, topic_id):
+    topic = get_object_or_404(Topic, id=topic_id)
+    if request.method == "POST":
+        code_snippet = request.POST.get("code_snippet", "")
+        print(f"Received code: {code_snippet}")  # Debugging line
+        old_stdout = sys.stdout
+        redirected_output = sys.stdout = io.StringIO()
+        
+        safe_globals = {"__builtins__": {}}
+        try:
+            exec(code_snippet, safe_globals)
+            output = redirected_output.getvalue()
+            print(f"Output: {output}")  # Debugging line
+        except Exception as e:
+            output = f"Error: {str(e)}"
+            print(f"Error: {output}")  # Debugging line
+        finally:
+            sys.stdout = old_stdout
+        return JsonResponse({"output": output})
+    return JsonResponse({"error": "Invalid request method"}, status=405)
+
+
