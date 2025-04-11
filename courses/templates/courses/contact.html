@@ -1,0 +1,31 @@
+{% extends 'courses/base.html' %}
+
+{% block content %}
+  <div class="contact-container">
+    <h5>Contact Us</h5>
+    <form method="POST">
+      {% csrf_token %}
+      <div class="input-field">
+        <input type="text" id="name" name="name" required />
+        <label for="name">Your Name</label>
+      </div>
+
+      <div class="input-field">
+        <input type="email" id="email" name="email" required />
+        <label for="email">Your Email</label>
+      </div>
+
+      <div class="input-field">
+        <input type="text" id="subject" name="subject" required />
+        <label for="subject">Subject</label>
+      </div>
+
+      <div class="input-field">
+        <textarea id="message" name="message" class="materialize-textarea" required></textarea>
+        <label for="message">Your Message</label>
+      </div>
+
+      <button type="submit" class="btn waves-effect waves-light">Send Message</button>
+    </form>
+  </div>
+{% endblock %}
