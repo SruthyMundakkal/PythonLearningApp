@@ -29,7 +29,9 @@ DEBUG = True
 ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
-    '.vercel.app',  # Allow all Vercel deployments (*.vercel.app)
+    '.vercel.app',
+    '*', 
+    '.onrender.com'
 ]
 
 
