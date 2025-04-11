@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -143,3 +144,11 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'sruthy228.1997@gmail.com'  # Your email
 EMAIL_HOST_PASSWORD = 'kjvo qkfp wpet pwmb'  # Your email password (or app password)
 CONTACT_EMAIL = 'sruthy228.1997@gmail.com'  # Email where you want to receive the messages
+
+# Static files settings
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Media files settings
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
