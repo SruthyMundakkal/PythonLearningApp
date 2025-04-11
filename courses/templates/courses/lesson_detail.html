@@ -9,7 +9,7 @@
 
 <h6>Edit the Code</h6>
 <div style="background-color:hsla(0, 0.00%, 97.30%, 0.99); padding: 1rem; border-radius: 8px; border:1px solid #444; margin-bottom: 1rem;">
-    <form method="POST" id="code-form">
+    <form method="POST" action="{% url 'run_code' topic.id %}" id="code-form">
         {% csrf_token %}
         <textarea id="code-editor" name="code_snippet" rows="10" style="width: 100%;">{{ topic.code_snippet }}</textarea>
         <button type="submit" class="btn btn-primary">Run Code</button>
@@ -37,11 +37,8 @@
     
         form.addEventListener("submit", function (event) {
             event.preventDefault();
-            console.log("Form submitting...");
         
-            const codeSnippet = textarea.value;
-    
-            console.log(codeSnippet); // Print the code snippet to the console
+            const codeSnippet = editor.getValue();  // get value from CodeMirror
         
             fetch("{% url 'run_code' topic.id %}", {
                 method: "POST",
@@ -53,18 +50,16 @@
             })
             .then(response => response.json())
             .then(data => {
-                console.log("Response data:", data); // Log the response data to inspect it
                 if (data.output) {
-                    outputDiv.innerHTML = `<pre style="background: black; color: white; padding: 10px; border-radius: 5px; font-family: Consolas, monospace;">${data.output}</pre>`;
+                    outputDiv.innerHTML = `<pre style="background: black; color: white; padding: 10px; border-radius: 5px;">${data.output}</pre>`;
                 } else if (data.error) {
-                    outputDiv.innerHTML = `<pre style="background: #ff3333; color: white; padding: 10px; border-radius: 5px; font-family: Consolas, monospace;">${data.error}</pre>`;
+                    outputDiv.innerHTML = `<pre style="background: #ff3333; color: white; padding: 10px; border-radius: 5px;">${data.error}</pre>`;
                 }
             })
             .catch(error => {
-                console.error("Error in fetch:", error);
-                outputDiv.innerHTML = `<pre style="background: #ff3333; color: white; padding: 10px; border-radius: 5px; font-family: Consolas, monospace;">Error: ${error}</pre>`;
+                outputDiv.innerHTML = `<pre style="background: #ff3333; color: white; padding: 10px; border-radius: 5px;">Error: ${error}</pre>`;
             });
         });
     });
-    </script>
     
+</script>
