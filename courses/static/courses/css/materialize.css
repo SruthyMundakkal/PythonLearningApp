@@ -16,7 +16,7 @@
 
 /* Styling for each topic list */
 .topics {
-  background-color: #918383;
+  /* background-color: #918383; */
   padding: 10px;
   border-radius: 5px;
   margin-top: 10px;
@@ -29,7 +29,7 @@
 }
 
 #lesson-detail {
-  background-color: #d2c4c4;
+  /* background-color: #d2c4c4; */
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
